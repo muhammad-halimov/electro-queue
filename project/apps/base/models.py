@@ -38,7 +38,7 @@ class User(AbstractUser):
 
     # Представление модели в Админке
     def __str__(self):
-        return self.username
+        return self.username or self.email
 
 
 # Модель окна

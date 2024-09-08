@@ -176,25 +176,26 @@ def notifications(request):
 
 
 
-@login_required(login_url='sign_in')
-@csrf_exempt
-def post_queue(request):
+@login_required(login_url='sign_in') # Требование для регистрации
+@csrf_exempt # Игнорирование csrf_token
+def post_queue(request): # Добавление очереди
     if request.method == 'POST':
         try:
-            data = json.loads(request.body)
+            data = json.loads(request.body) # Берем данные из POST
             queue_number = data.get('queue_number')
             mail_type = data.get('mail_type')
             window = models.Windows.objects.order_by('?').first()
 
-            queue = models.Queue.objects.create(
+            queue = models.Queue.objects.create( # Создаем очередь с полученными данными
                 number=queue_number,
                 window=window,
                 type=mail_type,
                 user=request.user
             )
 
-            queue.save()
+            queue.save() # Сохраняем очередь
+            # Возвращаем promise в JS
             return JsonResponse({'success': True, 'queue_number': queue.number, 'window_number': queue.window.number})
-        except (ValueError, KeyError):
+        except (ValueError, KeyError): # Разного рода ошибки и исключение
             return JsonResponse({'error': 'Invalid request data'}, status=400)
     return JsonResponse({'error': 'Invalid request method'}, status=400)

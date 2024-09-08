@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from . import models
 from django import forms
 
+# Форма для регистрации пользователя
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = models.User
