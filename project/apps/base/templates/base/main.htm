@@ -1,0 +1,32 @@
+{% extends 'index.htm' %}
+{% load static %}
+{% block content %}
+    <main class="container my-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="service-card">
+                    <i class="bi bi-box service-icon"></i>
+                    <h3>Посылки</h3>
+                    <p>Отправка и получение посылок</p>
+                    <a href="{% url 'package' %}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="service-card">
+                    <i class="bi bi-envelope service-icon"></i>
+                    <h3>Письма</h3>
+                    <p>Отправка и получение писем</p>
+                    <a href="{% url 'mail' %}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="service-card">
+                    <i class="bi bi-cash service-icon"></i>
+                    <h3>Деньги</h3>
+                    <p>Денежные переводы и оплата</p>
+                    <a href="{% url 'cash' %}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

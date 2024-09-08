@@ -1,0 +1,43 @@
+{% load static %}
+<header class="bg-primary text-white py-3">
+    <div class="container d-flex justify-content-around align-items-center flex-wrap">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <h1><a href="{% url 'main' %}">Электронная очередь</a></h1>
+        <div class="d-flex flex-wrap">
+            <div class="window-card window-card-client d-flex flex-wrap" id="window-card-client">
+                {% for uqueue in uqueues %}
+                    <div class="window-card">
+                        <span class="window-number">№{{ uqueue.number }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            {% for queue in queues %}
+                <div class="window-card">
+                    <span class="window-number">№{{ queue.number }}</span>
+                    <span>{{ queue.window.number }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% if not request.user.is_authenticated %}
+        <a class="d-flex flex-column" href="{% url 'sign_in' %}" style="font-size: 1.25rem;">
+            <i class="bi bi-person-circle" style="font-size: 4rem"></i>
+            Войти
+        </a>
+    {% else %}
+        <a class="d-flex flex-column justify-content-center align-items-center" href="{% url 'notifications' %}" style="font-size: 1.25rem;">
+            <i class="bi bi-bell" style="font-size: 4rem"></i>
+            Уведомления
+        </a>
+        <a class="d-flex flex-column justify-content-center align-items-center" href="{% url 'logout' %}" style="font-size: 1.25rem;">
+            <i class="bi bi-box-arrow-left" style="font-size: 4rem"></i>
+            {{ request.user.username }}
+        </a>
+    {% endif %}
+    </div>
+</header>

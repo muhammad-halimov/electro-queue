@@ -1,0 +1,16 @@
+{% extends 'index.htm' %}
+{% load static %}
+{% block content %}
+    <main class="container-fluid d-flex flex-column align-items-center" style="height: 100vh;">
+        {% for notification in notifications %}
+            <div class="row w-100 mt-2">
+                <div class="col-12 alert alert-primary" role="alert">
+                    Вас вызывают к окну {{ notification.window.number }}. 
+                    Ваш талон {{ notification.number }}. 
+                    Прошло {{ notification.created|timesince }}.
+                    Дата {{ notification.created }}
+                </div>
+            </div>
+        {% endfor %}
+    </main>
+{% endblock %}
